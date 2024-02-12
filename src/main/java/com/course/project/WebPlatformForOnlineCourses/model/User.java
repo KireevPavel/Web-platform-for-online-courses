@@ -9,9 +9,10 @@ import lombok.Data;
 import lombok.NonNull;
 
 import java.time.LocalDate;
+import java.util.Set;
 
-@Data
 @Builder
+@Data
 public class User {
     private long id;
     @Email
@@ -29,6 +30,7 @@ public class User {
     @AssertFalse
     private boolean loggedIn;
     private String Status;
+    private Set<Long> friends;
 
 }
 

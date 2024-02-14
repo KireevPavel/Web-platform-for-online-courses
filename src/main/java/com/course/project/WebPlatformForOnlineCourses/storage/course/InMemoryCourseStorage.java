@@ -1,13 +1,14 @@
-package com.course.project.WebPlatformForOnlineCourses.storage;
+package com.course.project.WebPlatformForOnlineCourses.storage.course;
 
 import com.course.project.WebPlatformForOnlineCourses.model.Course;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
+
 @Slf4j
 @Component
-public class InMemoryCourseStorage implements Storage<Course> {
+public class InMemoryCourseStorage implements CourseStorage {
 
     private final HashMap<Long, Course> courses = new HashMap<>();
     private long id = 0;

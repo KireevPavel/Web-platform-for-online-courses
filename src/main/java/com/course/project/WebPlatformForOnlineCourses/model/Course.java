@@ -4,9 +4,12 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NonNull;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 @Data
 @Builder
@@ -25,5 +28,10 @@ public class Course {
     private int durationInMonths;
     @Positive
     private int numberOfLessons;
+    @NonNull
+    private Set<Long> likes;
+    @NonNull
+    private Set<Category> category;
+
 
 }

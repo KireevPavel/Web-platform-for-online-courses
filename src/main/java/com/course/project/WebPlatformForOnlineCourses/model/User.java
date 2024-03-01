@@ -9,12 +9,13 @@ import lombok.Data;
 import lombok.NonNull;
 
 import java.time.LocalDate;
-import java.util.Set;
 
 @Builder
 @Data
 public class User {
     private long id;
+    @NonNull
+    private String name;
     @Email
     @NonNull
     private String email;
@@ -24,13 +25,11 @@ public class User {
     @NonNull
     @NotBlank
     private String password;
-    private String name;
     @Past
     private LocalDate birthday;
     @AssertFalse
     private boolean loggedIn;
-    private String Status;
-    private Set<Long> friends;
+    private String status;
 
 }
 

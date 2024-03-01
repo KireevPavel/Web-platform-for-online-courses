@@ -7,12 +7,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
+import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/Users")
 public class UserController {
 
     private final UserService userService;
@@ -28,8 +28,8 @@ public class UserController {
     }
 
     @GetMapping
-    public Collection<User> getUsers() {
-        return userService.getAllUsers().values();
+    public List<User> getUsers() {
+        return userService.getAllUsers();
     }
 
     @GetMapping("/{id}")
@@ -38,7 +38,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    public User removeUserById(@PathVariable long id) {
-        return userService.removeUserById(id);
+    public void removeUserById(@PathVariable long id) {
+        userService.removeUserById(id);
     }
 }

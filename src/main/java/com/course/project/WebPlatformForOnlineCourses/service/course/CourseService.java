@@ -2,11 +2,11 @@ package com.course.project.WebPlatformForOnlineCourses.service.course;
 
 import com.course.project.WebPlatformForOnlineCourses.model.Course;
 
-import java.util.HashMap;
+import java.util.List;
 
 public interface CourseService {
 
-    HashMap<Long, Course> getAllCourses();
+    List<Course> getAllCourses();
 
     Course addCourse(Course course);
 
@@ -14,5 +14,5 @@ public interface CourseService {
 
     Course getCourseById(long id);
 
-    Course removeCourseById(long id);
+    void removeCourseById(long id);
 }

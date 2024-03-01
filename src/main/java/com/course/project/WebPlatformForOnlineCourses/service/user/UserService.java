@@ -2,10 +2,10 @@ package com.course.project.WebPlatformForOnlineCourses.service.user;
 
 import com.course.project.WebPlatformForOnlineCourses.model.User;
 
-import java.util.HashMap;
+import java.util.List;
 
 public interface UserService {
-    HashMap<Long, User> getAllUsers();
+    List<User> getAllUsers();
 
     User addUser(User user);
 
@@ -13,6 +13,6 @@ public interface UserService {
 
     User getUserById(long id);
 
-    User removeUserById(long id);
+    void removeUserById(long id);
 
 }

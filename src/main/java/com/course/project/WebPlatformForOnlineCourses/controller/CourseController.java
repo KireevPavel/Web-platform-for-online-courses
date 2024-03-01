@@ -7,12 +7,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
+import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/courses")
+@RequestMapping("/Courses")
 public class CourseController {
 
     private final CourseService courseService;
@@ -28,8 +28,8 @@ public class CourseController {
     }
 
     @GetMapping
-    public Collection<Course> getCourses() {
-        return courseService.getAllCourses().values();
+    public List<Course> getCourses() {
+        return courseService.getAllCourses();
     }
 
     @GetMapping("/{id}")
@@ -38,7 +38,7 @@ public class CourseController {
     }
 
     @DeleteMapping("/{id}")
-    public Course removeCourseById(@PathVariable long id) {
-        return courseService.removeCourseById(id);
+    public void removeCourseById(@PathVariable long id) {
+        courseService.removeCourseById(id);
     }
 }

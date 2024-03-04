@@ -34,6 +34,7 @@ public class UserController {
 
     @GetMapping("/{id}")
     public User getUserById(@PathVariable long id) {
+        log.info("GET запрос на получение списка друзей пользователя с id: {}", id);
         return userService.getUserById(id);
     }
 

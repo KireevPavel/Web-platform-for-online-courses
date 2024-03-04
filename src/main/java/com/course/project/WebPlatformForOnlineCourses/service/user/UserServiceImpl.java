@@ -1,12 +1,15 @@
 package com.course.project.WebPlatformForOnlineCourses.service.user;
 
 import com.course.project.WebPlatformForOnlineCourses.dao.user.UserDao;
+import com.course.project.WebPlatformForOnlineCourses.model.Friends;
 import com.course.project.WebPlatformForOnlineCourses.model.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Slf4j

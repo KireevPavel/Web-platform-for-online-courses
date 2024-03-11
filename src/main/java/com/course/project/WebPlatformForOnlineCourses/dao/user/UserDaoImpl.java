@@ -3,7 +3,7 @@ package com.course.project.WebPlatformForOnlineCourses.dao.user;
 
 import com.course.project.WebPlatformForOnlineCourses.exception.ObjectNotFoundException;
 import com.course.project.WebPlatformForOnlineCourses.model.User;
-import com.course.project.WebPlatformForOnlineCourses.orm.UserOrm;
+import com.course.project.WebPlatformForOnlineCourses.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -18,12 +18,12 @@ import java.util.List;
 public class UserDaoImpl implements UserDao {
 
     private final JdbcTemplate jdbcTemplate;
-    private final UserOrm userOrm;
+    private final UserMapper userMapper;
 
     @Override
     public List<User> getAll() {
         String sql = "SELECT * FROM users";
-        return jdbcTemplate.query(sql, userOrm);
+        return jdbcTemplate.query(sql, userMapper);
 
     }
 
@@ -31,7 +31,7 @@ public class UserDaoImpl implements UserDao {
     public User add(User user) {
         SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(jdbcTemplate).withTableName("Users")
                 .usingGeneratedKeyColumns("user_id");
-        user.setId(simpleJdbcInsert.executeAndReturnKey(userOrm.toMap(user)).longValue());
+        user.setId(simpleJdbcInsert.executeAndReturnKey(userMapper.toMap(user)).longValue());
         return user;
     }
 
@@ -49,7 +49,7 @@ public class UserDaoImpl implements UserDao {
     public User getById(long id) {
         try {
             String sql = "SELECT * FROM Users WHERE user_id = ?";
-            return jdbcTemplate.queryForObject(sql, userOrm, id);
+            return jdbcTemplate.queryForObject(sql, userMapper, id);
         } catch (RuntimeException e) {
             log.info("Некорректный id {}", id);
             throw new ObjectNotFoundException("Пользователь не найден");

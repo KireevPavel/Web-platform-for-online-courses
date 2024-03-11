@@ -1,8 +1,8 @@
 package com.course.project.WebPlatformForOnlineCourses.dao.course;
 
 import com.course.project.WebPlatformForOnlineCourses.exception.ObjectNotFoundException;
+import com.course.project.WebPlatformForOnlineCourses.mapper.CourseMapper;
 import com.course.project.WebPlatformForOnlineCourses.model.Course;
-import com.course.project.WebPlatformForOnlineCourses.orm.CourseOrm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -17,18 +17,18 @@ import java.util.List;
 public class CourseDaoImpl implements CourseDao {
 
     private final JdbcTemplate jdbcTemplate;
-    private final CourseOrm courseOrm;
+    private final CourseMapper courseMapper;
 
     @Override
     public List<Course> getAll() {
         String sql = "SELECT * FROM courses";
-        return jdbcTemplate.query(sql, courseOrm);
+        return jdbcTemplate.query(sql, courseMapper);
     }
 
     @Override
     public Course add(Course course) {
         SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(jdbcTemplate).withTableName("courses").usingGeneratedKeyColumns("course_id");
-        course.setId(simpleJdbcInsert.executeAndReturnKey(courseOrm.toMap(course)).longValue());
+        course.setId(simpleJdbcInsert.executeAndReturnKey(courseMapper.toMap(course)).longValue());
         return course;
     }
 
@@ -43,7 +43,7 @@ public class CourseDaoImpl implements CourseDao {
     public Course getById(long id) {
         try {
             String sql = "SELECT * FROM courses WHERE course_id = ?";
-            return jdbcTemplate.queryForObject(sql, courseOrm, id);
+            return jdbcTemplate.queryForObject(sql, courseMapper, id);
         } catch (RuntimeException e) {
             log.info("Некорректный id {}", id);
             throw new ObjectNotFoundException("Курс не найден");

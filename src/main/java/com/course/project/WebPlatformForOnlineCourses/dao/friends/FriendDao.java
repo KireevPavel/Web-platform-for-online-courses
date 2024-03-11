@@ -7,6 +7,7 @@ import java.util.List;
 public interface FriendDao {
 
     List<User> get(long userId);
+
     void add(long firstUserId, long secondUserId);
 
     void removeById(long firstUserId, long secondUserId);

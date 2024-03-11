@@ -1,7 +1,7 @@
 package com.course.project.WebPlatformForOnlineCourses.dao.friends;
 
+import com.course.project.WebPlatformForOnlineCourses.mapper.UserMapper;
 import com.course.project.WebPlatformForOnlineCourses.model.User;
-import com.course.project.WebPlatformForOnlineCourses.orm.UserOrm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -16,12 +16,12 @@ import java.util.List;
 public class FriendDaoImpl implements FriendDao {
 
     private final JdbcTemplate jdbcTemplate;
-    private final UserOrm userOrm;
+    private final UserMapper userMapper;
 
     @Override
     public List<User> get(long userId) {
         String sql = "SELECT * FROM users WHERE user_id IN (SELECT friend_id FROM friends WHERE user_id = ?) ";
-        return jdbcTemplate.query(sql, userOrm, userId);
+        return jdbcTemplate.query(sql, userMapper, userId);
     }
 
     @Override
@@ -43,7 +43,7 @@ public class FriendDaoImpl implements FriendDao {
                 "JOIN friends as f2 ON  f2.friend_id = f1.friend_id AND f2.user_id = ?\n" +
                 "JOIN users u on u.user_id = f1.friend_id\n" +
                 "WHERE f1.user_id = ?";
-        List<User> mutualFriend = jdbcTemplate.query(sql, userOrm, firstUserId, secondUserId);
+        List<User> mutualFriend = jdbcTemplate.query(sql, userMapper, firstUserId, secondUserId);
         if (mutualFriend.isEmpty()) {
             log.info("У пользователей с id - {} и {} нет общих друзей", firstUserId, secondUserId);
             return Collections.emptyList();

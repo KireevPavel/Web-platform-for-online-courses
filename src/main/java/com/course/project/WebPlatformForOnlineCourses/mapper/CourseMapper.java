@@ -1,6 +1,8 @@
-package com.course.project.WebPlatformForOnlineCourses.orm;
+package com.course.project.WebPlatformForOnlineCourses.mapper;
 
+import com.course.project.WebPlatformForOnlineCourses.dao.category.CategoryDao;
 import com.course.project.WebPlatformForOnlineCourses.model.Course;
+import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
@@ -10,7 +12,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Component
-public class CourseOrm implements RowMapper<Course> {
+@RequiredArgsConstructor
+public class CourseMapper implements RowMapper<Course> {
+
+    private final CategoryDao categoryDao;
 
     @Override
     public Course mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -21,6 +26,7 @@ public class CourseOrm implements RowMapper<Course> {
                 .startDate(rs.getDate("start_date").toLocalDate())
                 .durationInMonths(rs.getInt("duration_in_months"))
                 .numberOfLessons(rs.getInt("number_of_lessons"))
+                .categories(categoryDao.getCategoriesListForCourse(rs.getLong("category_id")))
                 .build();
     }
 

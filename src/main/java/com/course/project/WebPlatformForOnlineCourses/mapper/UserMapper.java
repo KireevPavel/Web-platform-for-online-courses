@@ -1,4 +1,4 @@
-package com.course.project.WebPlatformForOnlineCourses.orm;
+package com.course.project.WebPlatformForOnlineCourses.mapper;
 
 import com.course.project.WebPlatformForOnlineCourses.model.User;
 import org.springframework.jdbc.core.RowMapper;
@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Component
-public class UserOrm implements RowMapper<User> {
+public class UserMapper implements RowMapper<User> {
 
     @Override
     public User mapRow(ResultSet rs, int rowNum) throws SQLException {

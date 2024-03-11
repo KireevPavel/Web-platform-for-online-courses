@@ -9,14 +9,15 @@ import lombok.Data;
 import lombok.NonNull;
 
 import java.time.LocalDate;
-import java.util.Set;
+import java.util.List;
 
 @Data
 @Builder
+@Getter
+@Setter
 public class Course {
     private long id;
     @NotBlank
-    @NonNull
     private String name;
     @Size(max = 200)
     private String description;
@@ -26,5 +27,6 @@ public class Course {
     private int durationInMonths;
     @Positive
     private int numberOfLessons;
+    private List<Category> categories;
 
 }

@@ -18,6 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Repository
 public class CategoryDaoImpl implements CategoryDao {
+
     private final JdbcTemplate jdbcTemplate;
     private final CategoryMapper categoryMapper;
 

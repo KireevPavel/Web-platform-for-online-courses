@@ -15,7 +15,6 @@ import java.time.LocalDate;
 public class Course {
     private long id;
     @NotBlank
-    @NonNull
     private String name;
     @Size(max = 200)
     private String description;

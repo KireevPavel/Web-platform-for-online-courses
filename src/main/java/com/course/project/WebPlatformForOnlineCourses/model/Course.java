@@ -13,8 +13,6 @@ import java.util.List;
 
 @Data
 @Builder
-@Getter
-@Setter
 public class Course {
     private long id;
     @NotBlank

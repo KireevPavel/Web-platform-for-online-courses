@@ -12,7 +12,7 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/Users")
+@RequestMapping("/users")
 public class UserController {
 
     private final UserService userService;
@@ -34,7 +34,6 @@ public class UserController {
 
     @GetMapping("/{id}")
     public User getUserById(@PathVariable long id) {
-        log.info("GET запрос на получение списка друзей пользователя с id: {}", id);
         return userService.getUserById(id);
     }
 

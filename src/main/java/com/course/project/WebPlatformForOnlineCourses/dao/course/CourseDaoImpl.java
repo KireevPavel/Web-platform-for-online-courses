@@ -1,7 +1,9 @@
 package com.course.project.WebPlatformForOnlineCourses.dao.course;
 
+import com.course.project.WebPlatformForOnlineCourses.dao.category.CategoryDao;
 import com.course.project.WebPlatformForOnlineCourses.exception.ObjectNotFoundException;
 import com.course.project.WebPlatformForOnlineCourses.mapper.CourseMapper;
+import com.course.project.WebPlatformForOnlineCourses.model.Category;
 import com.course.project.WebPlatformForOnlineCourses.model.Course;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +20,7 @@ public class CourseDaoImpl implements CourseDao {
 
     private final JdbcTemplate jdbcTemplate;
     private final CourseMapper courseMapper;
+    private final CategoryDao categoryDao;
 
     @Override
     public List<Course> getAll() {
@@ -27,8 +30,11 @@ public class CourseDaoImpl implements CourseDao {
 
     @Override
     public Course add(Course course) {
-        SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(jdbcTemplate).withTableName("courses").usingGeneratedKeyColumns("course_id");
+        SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(jdbcTemplate).withTableName("courses")
+                .usingGeneratedKeyColumns("course_id");
         course.setId(simpleJdbcInsert.executeAndReturnKey(courseMapper.toMap(course)).longValue());
+        List<Category> courseCategories = categoryDao.add(course.getId(), course.getCategories());
+        course.setCategories(courseCategories);
         return course;
     }
 

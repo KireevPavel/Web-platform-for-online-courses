@@ -1,4 +1,4 @@
-package com.course.project.WebPlatformForOnlineCourses.dao.friends;
+package com.course.project.WebPlatformForOnlineCourses.dao.friend;
 
 import com.course.project.WebPlatformForOnlineCourses.model.User;
 

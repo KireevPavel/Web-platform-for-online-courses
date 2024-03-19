@@ -1,15 +1,14 @@
 package com.course.project.WebPlatformForOnlineCourses.model;
 
-import jakarta.validation.constraints.AssertFalse;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.*;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
+import org.springframework.data.annotation.Transient;
+
 
 import java.time.LocalDate;
-import java.util.List;
+import java.util.Set;
 
 @Builder
 @Data
@@ -23,14 +22,15 @@ public class User {
     @NonNull
     @NotBlank
     private String login;
-    @NonNull
-    @NotBlank
+    @Size(min = 5, message = "Не меньше 5 знаков")
     private String password;
+    @Transient
+    private String PasswordConfirm;
     @Past
     private LocalDate birthday;
     @AssertFalse
     private boolean loggedIn;
-    private String status;
+    private Set<Role> roles;
 
 }
 

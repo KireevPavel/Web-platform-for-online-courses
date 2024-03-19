@@ -22,7 +22,6 @@ public class UserMapper implements RowMapper<User> {
                 .password(rs.getString("password"))
                 .birthday(rs.getDate("birthday").toLocalDate())
                 .loggedIn(rs.getBoolean("logged_in"))
-                .status(rs.getString("status"))
                 .build();
     }
 
@@ -34,7 +33,6 @@ public class UserMapper implements RowMapper<User> {
         values.put("password", user.getPassword());
         values.put("birthday", user.getBirthday());
         values.put("logged_in", user.isLoggedIn());
-        values.put("status", user.getStatus());
         return values;
     }
 
